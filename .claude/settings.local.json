@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:claude.ai)",
+      "Bash(mkdir -p src)",
+      "Bash(python3 -c ' *)",
+      "Bash(python3 -)",
+      "Bash(mkdir -p site/assets)",
+      "Bash(file site/assets/*)",
+      "Bash(sips --formats)",
+      "Bash(python3 -c \"import PIL; print\\('Pillow', PIL.__version__\\)\")",
+      "Bash(gh auth *)",
+      "Bash(npm init *)",
+      "Bash(npm install *)",
+      "mcp__claude-in-chrome__tabs_context_mcp",
+      "mcp__949a0b73-f00b-4ea4-a5aa-135ddbe5570a__search_files",
+      "Bash(mdfind -name \"photo-michica\")",
+      "Bash(mdfind -name \"gusto-deck\")",
+      "Bash(mdfind -name \"Screenshot 2026-08-12 at 10.17.43\")",
+      "Read(//Users/michicaprovato/Desktop/**)",
+      "Bash(cd /private/tmp/claude-501/-Users-michicaprovato-Documents-Michica-portfolio/713e6a27-141d-4ba7-bb81-02f0e1bf8494/scratchpad *)",
+      "Bash(node -e ' *)",
+      "mcp__949a0b73-f00b-4ea4-a5aa-135ddbe5570a__download_file_content"
+    ]
+  }
+}
