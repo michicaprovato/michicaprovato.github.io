@@ -15,6 +15,10 @@
   a:hover { color: #008471; }
   img { max-width: 100%; }
   nav { position: sticky; top: 0; z-index: 100; background: #f9f6ef; }
+  nav a { color: #14342e; }
+  nav a:hover { color: #c45f3f; }
+  nav a.active { color: #c45f3f; position: relative; }
+  nav a.active::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); bottom: -12px; width: 6px; height: 6px; border-radius: 50%; background: #c45f3f; }
   .grain { position: fixed; inset: 0; pointer-events: none; z-index: 90; opacity: .45; background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%22.9%22 numOctaves=%222%22/%3E%3CfeColorMatrix type=%22saturate%22 values=%220%22/%3E%3C/filter%3E%3Crect width=%22300%22 height=%22300%22 filter=%22url(%23n)%22 opacity=%22.16%22/%3E%3C/svg%3E'); }
   @media (max-width: 860px) {
     nav[style] { flex-wrap: wrap; gap: 14px; padding: 22px 24px !important; }
@@ -35,7 +39,7 @@
     <a href="index.html" style="font-family: 'Josefin Sans', sans-serif; font-weight: 400; font-size: 20px; letter-spacing: .3em; text-transform: uppercase; color: #14342e;">Michica Provato</a>
     <div style="display: flex; gap: 44px; font-size: 15px; letter-spacing: .22em; text-transform: uppercase;">
       <a href="work.html">Work</a>
-      <a href="about.html" style="border-bottom: 2px solid #c45f3f;">About</a>
+      <a href="about.html" class="active">About</a>
       <a href="contact.html">Contact</a>
     </div>
   </nav>
