@@ -16,7 +16,7 @@
   a:hover { color: #008471; }
   img { max-width: 100%; }
   nav { position: sticky; top: 0; z-index: 100; background: #f9f6ef; }
-  .cs-subnav { top: var(--nav-h, 97px) !important; }
+  .cs-subnav { top: calc(var(--nav-h, 97px) - 1px) !important; }
   section[id] { scroll-margin-top: calc(var(--nav-h, 97px) + 70px) !important; }
   .grain { position: fixed; inset: 0; pointer-events: none; z-index: 90; opacity: .45; background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%22.9%22 numOctaves=%222%22/%3E%3CfeColorMatrix type=%22saturate%22 values=%220%22/%3E%3C/filter%3E%3Crect width=%22300%22 height=%22300%22 filter=%22url(%23n)%22 opacity=%22.16%22/%3E%3C/svg%3E'); }
   @media (max-width: 860px) {
@@ -52,7 +52,7 @@
     <p style="margin: 0; font-size: 19px; line-height: 1.65; color: #4a5a54; max-width: 700px; text-wrap: pretty;">Craft, vision, operations, and culture, told honestly, including what I missed. Every case is the same instinct: make the judgment explicit, and make it something a team can build against.</p>
   </header>
 
-  <div class="cs-subnav" style="position: sticky; top: 0; z-index: 95; background: #f9f6ef; border-top: 1px solid #e2dcc0; border-bottom: 1px solid #e2dcc0;">
+  <div class="cs-subnav" style="position: sticky; top: 0; z-index: 95; background: #f9f6ef; border-bottom: 1px solid #e2dcc0;">
     <div class="cs-nav" style="max-width: 1200px; margin: 0 auto; padding: 16px 64px; display: flex; flex-wrap: wrap; gap: 8px 32px; font-size: 13px; letter-spacing: .16em; text-transform: uppercase;">
       <a href="#amazon-intuit" style="display: flex; gap: 8px; align-items: baseline; color: #14342e;"><span style="color: #c45f3f; font-weight: 600;">01</span>Amazon × Intuit</a>
       <a href="#ai-for-tax" style="display: flex; gap: 8px; align-items: baseline; color: #14342e;"><span style="color: #c45f3f; font-weight: 600;">02</span>AI for tax</a>
@@ -406,7 +406,7 @@
 (function () {
   var nav = document.querySelector('nav');
   function setNavHeight() {
-    document.documentElement.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+    document.documentElement.style.setProperty('--nav-h', nav.getBoundingClientRect().height + 'px');
   }
   setNavHeight();
   window.addEventListener('resize', setNavHeight);
