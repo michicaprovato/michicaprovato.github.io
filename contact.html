@@ -20,6 +20,20 @@
   nav a.active { color: #f29cc3; position: relative; }
   nav a.active::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); bottom: -12px; width: 6px; height: 6px; border-radius: 50%; background: #f29cc3; }
   .grain { position: fixed; inset: 0; pointer-events: none; z-index: 90; opacity: .5; mix-blend-mode: overlay; background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%22.9%22 numOctaves=%222%22/%3E%3CfeColorMatrix type=%22saturate%22 values=%220%22/%3E%3C/filter%3E%3Crect width=%22300%22 height=%22300%22 filter=%22url(%23n)%22 opacity=%22.2%22/%3E%3C/svg%3E'); }
+  .field-label { font-size: 13px; letter-spacing: .22em; text-transform: uppercase; color: #f29cc3; margin-bottom: 8px; display: block; }
+  .field { background: rgba(249,246,239,.06); border: 1px solid rgba(255,255,255,.32); color: #f9f6ef; font-family: 'Raleway', sans-serif; font-size: 17px; padding: 14px 16px; width: 100%; box-sizing: border-box; border-radius: 0; }
+  .field::placeholder { color: rgba(249,246,239,.45); }
+  .field:focus { border-color: #d6d35f; background: rgba(249,246,239,.1); outline: none; }
+  .pill { display: flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,.32); padding: 10px 18px; font-size: 15px; cursor: pointer; }
+  .pill input { accent-color: #d6d35f; cursor: pointer; }
+  .send-btn { background: #d6d35f; color: #14342e; font-family: 'Raleway', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: .2em; text-transform: uppercase; padding: 16px 32px; border: none; border-radius: 0; cursor: pointer; box-shadow: 4px 4px 0 #f29cc3; }
+  .send-btn:hover { background: #f9f6ef; }
+  .form-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 72px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  #sent-note { display: none; font-size: 15px; color: #d6d35f; }
+  @media (max-width: 800px) {
+    .form-grid, .form-row { grid-template-columns: 1fr !important; gap: 32px; }
+  }
   @media (max-width: 860px) {
     nav[style] { flex-wrap: wrap; gap: 14px; padding: 22px 24px !important; }
     main[style] { padding: 48px 24px !important; grid-template-columns: 1fr !important; gap: 40px !important; }
@@ -54,7 +68,63 @@
     </div>
     <img src="assets/photo-michica-800.webp" srcset="assets/photo-michica-400.webp 400w, assets/photo-michica-800.webp 800w" sizes="(max-width: 860px) 92vw, 34vw" width="800" height="800" alt="Michica Provato" style="width: 100%; height: auto; display: block; border-radius: 12px; box-shadow: 12px 12px 0 rgba(214,211,95,.55), 0 30px 70px rgba(0,0,0,.25);">
   </main>
+
+  <section style="max-width: 1200px; margin: 0 auto; padding: 0 64px 120px; width: 100%; box-sizing: border-box;">
+    <div style="border-top: 1px solid rgba(255,255,255,.28); padding-top: 56px;">
+      <div class="form-grid">
+        <form id="note-form" style="display: flex; flex-direction: column; gap: 24px;" >
+          <h2 style="margin: 0; font-family: 'Josefin Sans', sans-serif; font-weight: 300; font-size: 34px; letter-spacing: .12em; text-transform: uppercase;">Send a note</h2>
+          <div class="form-row">
+            <div>
+              <label class="field-label" for="cf-name">your name</label>
+              <input class="field" id="cf-name" name="name" type="text" placeholder="Jane Chen" autocomplete="name" required>
+            </div>
+            <div>
+              <label class="field-label" for="cf-email">your email</label>
+              <input class="field" id="cf-email" name="email" type="email" placeholder="jane@company.com" autocomplete="email" required>
+            </div>
+          </div>
+          <div>
+            <span class="field-label">this is about</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+              <label class="pill"><input type="radio" name="topic" value="A Director / Senior Director role" checked> A leadership role</label>
+              <label class="pill"><input type="radio" name="topic" value="Fractional design leadership"> Fractional engagement</label>
+              <label class="pill"><input type="radio" name="topic" value="Something else"> Something else</label>
+            </div>
+          </div>
+          <div>
+            <label class="field-label" for="cf-message">what you&rsquo;re working on</label>
+            <textarea class="field" id="cf-message" name="message" rows="5" placeholder="A sentence or two is plenty." required></textarea>
+          </div>
+          <div style="display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
+            <button class="send-btn" type="submit">Send message &rarr;</button>
+            <div id="sent-note">Your email app should open with the note ready to send.</div>
+          </div>
+        </form>
+        <div>
+          <div style="font-size: 13px; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 14px;">how this works</div>
+          <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; line-height: 1.55; color: #eaf6f1;">This opens a pre-written email in your own mail app, addressed to me. Nothing is stored anywhere else. Prefer LinkedIn? <a href="https://linkedin.com/in/michica">Message me there.</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
+<script>
+document.getElementById('note-form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var form = e.target;
+  if (!form.reportValidity()) return;
+  var subject = encodeURIComponent('Portfolio - Contact request');
+  var body = encodeURIComponent(
+    'Hi Michica,\n\n' +
+    'This is about: ' + form.topic.value + '\n\n' +
+    form.message.value + '\n\n' +
+    '\u2014 ' + form.name.value + '\n' + form.email.value
+  );
+  window.location.href = 'mailto:michicamedia@gmail.com?subject=' + subject + '&body=' + body;
+  document.getElementById('sent-note').style.display = 'block';
+});
+</script>
 <script data-goatcounter="https://michicaprovato.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </body>
