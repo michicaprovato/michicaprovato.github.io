@@ -90,6 +90,7 @@
             <div style="display: flex; flex-wrap: wrap; gap: 12px;">
               <label class="pill"><input type="radio" name="topic" value="A Director / Senior Director role" checked> A leadership role</label>
               <label class="pill"><input type="radio" name="topic" value="Fractional design leadership"> Fractional engagement</label>
+              <label class="pill"><input type="radio" name="topic" value="A case study request"> A case study request</label>
               <label class="pill"><input type="radio" name="topic" value="Something else"> Something else</label>
             </div>
           </div>
@@ -149,6 +150,33 @@ document.getElementById('note-form').addEventListener('submit', function (e) {
     btn.disabled = false;
   });
 });
+</script>
+<script>
+(function () {
+  var cs = new URLSearchParams(location.search).get('cs');
+  var m = location.hash.match(/^#request-([a-z-]+)$/);
+  if (m) cs = m[1];
+  if (!cs) return;
+  var names = {
+    'amazon-intuit': 'Amazon \u00d7 Intuit',
+    'ai-for-tax': 'AI for tax',
+    'platform': 'Platform transformation',
+    'filing': 'From foundation to filing',
+    'invoicing': 'Invoicing, without the work',
+    'payroll': 'Canada payroll journey'
+  };
+  var name = names[cs];
+  if (!name) return;
+  var form = document.getElementById('note-form');
+  var pills = form.querySelectorAll('[name=topic]');
+  for (var i = 0; i < pills.length; i++) {
+    pills[i].checked = pills[i].value === 'A case study request';
+  }
+  if (!form.elements.message.value) {
+    form.elements.message.value = 'I\u2019d like the full ' + name + ' case study.';
+  }
+  if (m) document.getElementById('send-a-note').scrollIntoView();
+})();
 </script>
 <script data-goatcounter="https://michicaprovato.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
