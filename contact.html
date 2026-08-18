@@ -73,6 +73,7 @@
     <div style="border-top: 1px solid rgba(255,255,255,.28); padding-top: 56px;">
       <div class="form-grid">
         <form id="note-form" style="display: flex; flex-direction: column; gap: 24px;" >
+          <input type="text" name="_honey" value="" style="display: none;" tabindex="-1" autocomplete="off" aria-hidden="true">
           <h2 style="margin: 0; font-family: 'Josefin Sans', sans-serif; font-weight: 300; font-size: 34px; letter-spacing: .12em; text-transform: uppercase;">Send a note</h2>
           <div class="form-row">
             <div>
@@ -103,7 +104,7 @@
         </form>
         <div>
           <div style="font-size: 13px; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 14px;">how this works</div>
-          <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; line-height: 1.55; color: #eaf6f1;">This opens a pre-written email in your own mail app, addressed to me. Nothing is stored anywhere else. Prefer LinkedIn? <a href="https://linkedin.com/in/michica">Message me there.</a></p>
+          <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; line-height: 1.55; color: #eaf6f1;">Your note goes straight to my inbox &mdash; no email app needed. Prefer LinkedIn? <a href="https://linkedin.com/in/michica">Message me there.</a></p>
         </div>
       </div>
     </div>
@@ -114,15 +115,39 @@ document.getElementById('note-form').addEventListener('submit', function (e) {
   e.preventDefault();
   var form = e.target;
   if (!form.reportValidity()) return;
-  var subject = encodeURIComponent('Portfolio - Contact request');
-  var body = encodeURIComponent(
-    'Hi Michica,\n\n' +
-    'This is about: ' + form.topic.value + '\n\n' +
-    form.message.value + '\n\n' +
-    '\u2014 ' + form.name.value + '\n' + form.email.value
-  );
-  window.location.href = 'mailto:michicamedia@gmail.com?subject=' + subject + '&body=' + body;
-  document.getElementById('sent-note').style.display = 'block';
+  var els = form.elements;
+  var btn = form.querySelector('.send-btn');
+  var note = document.getElementById('sent-note');
+  var original = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Sending\u2026';
+  fetch('https://formsubmit.co/ajax/michicamedia@gmail.com', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      name: els.name.value,
+      email: els.email.value,
+      'This is about': els.topic.value,
+      message: els.message.value,
+      _subject: 'Portfolio - Contact request',
+      _template: 'box',
+      _honey: els._honey.value
+    })
+  }).then(function (res) {
+    if (!res.ok) throw new Error('send failed');
+    note.textContent = 'Thanks \u2014 your note is on its way.';
+    note.style.display = 'block';
+    form.reset();
+  }).catch(function () {
+    var subject = encodeURIComponent('Portfolio - Contact request');
+    var body = encodeURIComponent('Hi Michica,\n\nThis is about: ' + els.topic.value + '\n\n' + els.message.value + '\n\n\u2014 ' + els.name.value + '\n' + els.email.value);
+    window.location.href = 'mailto:michicamedia@gmail.com?subject=' + subject + '&body=' + body;
+    note.textContent = 'Direct send hiccuped \u2014 your email app should open with the note ready instead.';
+    note.style.display = 'block';
+  }).finally(function () {
+    btn.textContent = original;
+    btn.disabled = false;
+  });
 });
 </script>
 <script data-goatcounter="https://michicaprovato.goatcounter.com/count"
