@@ -31,6 +31,8 @@
   .form-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 72px; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   #sent-note { display: none; font-size: 15px; color: #d6d35f; }
+  .field-error { display: none; font-size: 14px; letter-spacing: .02em; color: #f29cc3; margin-top: 8px; }
+  .field.invalid { border-color: #f29cc3; background: rgba(242,156,195,.08); }
   @media (max-width: 800px) {
     .form-grid, .form-row { grid-template-columns: 1fr !important; gap: 32px; }
   }
@@ -72,17 +74,19 @@
   <section id="send-a-note" style="scroll-margin-top: 120px; max-width: 1200px; margin: 0 auto; padding: 0 64px 120px; width: 100%; box-sizing: border-box;">
     <div style="border-top: 1px solid rgba(255,255,255,.28); padding-top: 56px;">
       <div class="form-grid">
-        <form id="note-form" style="display: flex; flex-direction: column; gap: 24px;" >
+        <form id="note-form" style="display: flex; flex-direction: column; gap: 24px;" novalidate>
           <input type="text" name="_honey" value="" style="display: none;" tabindex="-1" autocomplete="off" aria-hidden="true">
           <h2 style="margin: 0; font-family: 'Josefin Sans', sans-serif; font-weight: 300; font-size: 34px; letter-spacing: .12em; text-transform: uppercase;">Send a note</h2>
           <div class="form-row">
             <div>
               <label class="field-label" for="cf-name">your name</label>
               <input class="field" id="cf-name" name="name" type="text" placeholder="Jane Chen" autocomplete="name" required>
+              <div class="field-error" id="err-name">Please add your name.</div>
             </div>
             <div>
               <label class="field-label" for="cf-email">your email</label>
               <input class="field" id="cf-email" name="email" type="email" placeholder="jane@company.com" autocomplete="email" required>
+              <div class="field-error" id="err-email">Please add your email.</div>
             </div>
           </div>
           <div>
@@ -97,6 +101,7 @@
           <div>
             <label class="field-label" for="cf-message">what you&rsquo;re working on</label>
             <textarea class="field" id="cf-message" name="message" rows="5" placeholder="A sentence or two is plenty." required></textarea>
+            <div class="field-error" id="err-message">A sentence or two about what you’re working on is all I need.</div>
           </div>
           <div style="display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
             <button class="send-btn" type="submit">Send message &rarr;</button>
@@ -115,8 +120,22 @@
 document.getElementById('note-form').addEventListener('submit', function (e) {
   e.preventDefault();
   var form = e.target;
-  if (!form.reportValidity()) return;
   var els = form.elements;
+  var firstBad = null;
+  function setErr(input, errId, bad, msg) {
+    var err = document.getElementById(errId);
+    if (msg) err.textContent = msg;
+    err.style.display = bad ? 'block' : 'none';
+    input.classList.toggle('invalid', bad);
+    if (bad && !firstBad) firstBad = input;
+  }
+  var emailVal = els.email.value.trim();
+  var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
+  setErr(els.name, 'err-name', !els.name.value.trim());
+  setErr(els.email, 'err-email', !emailVal || !emailOk,
+    !emailVal ? 'Please add your email.' : 'That doesn\u2019t look like a complete email \u2014 mind checking?');
+  setErr(els.message, 'err-message', !els.message.value.trim());
+  if (firstBad) { firstBad.focus(); return; }
   var btn = form.querySelector('.send-btn');
   var note = document.getElementById('sent-note');
   var original = btn.textContent;
@@ -148,6 +167,12 @@ document.getElementById('note-form').addEventListener('submit', function (e) {
   }).finally(function () {
     btn.textContent = original;
     btn.disabled = false;
+  });
+});
+['cf-name', 'cf-email', 'cf-message'].forEach(function (id) {
+  document.getElementById(id).addEventListener('input', function () {
+    this.classList.remove('invalid');
+    document.getElementById(id.replace('cf-', 'err-')).style.display = 'none';
   });
 });
 </script>
