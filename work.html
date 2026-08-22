@@ -21,6 +21,11 @@
   nav a.active { color: #c45f3f; position: relative; }
   nav a.active::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); bottom: -12px; width: 6px; height: 6px; border-radius: 50%; background: #c45f3f; }
   .cs-subnav { top: calc(var(--nav-h, 97px) - 1px) !important; }
+  .cs-nav a { color: rgba(20,52,46,.6); font-weight: 400; }
+  .cs-nav a.is-active { color: #14342e; font-weight: 600; }
+  .cs-nav .chip { display: inline-block; width: 9px; height: 9px; border-radius: 50%; align-self: center; transform: scale(0); transition: transform .25s; }
+  .cs-nav a.is-active .chip { transform: scale(1); }
+  @media (prefers-reduced-motion: reduce) { .cs-nav .chip { transition: none; } .cs-subnav { transition: none !important; } }
   section[id] { scroll-margin-top: calc(var(--nav-h, 97px) + 70px) !important; }
   .grain { position: fixed; inset: 0; pointer-events: none; z-index: 90; opacity: .45; background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%22.9%22 numOctaves=%222%22/%3E%3CfeColorMatrix type=%22saturate%22 values=%220%22/%3E%3C/filter%3E%3Crect width=%22300%22 height=%22300%22 filter=%22url(%23n)%22 opacity=%22.16%22/%3E%3C/svg%3E'); }
   @media (max-width: 860px) {
@@ -57,14 +62,14 @@
     <p style="margin: 0; font-size: 19px; line-height: 1.65; color: #4a5a54; max-width: 700px; text-wrap: pretty;">Craft, vision, operations, and culture, told honestly, including what I missed. Every case is the same instinct: make the judgment explicit, and make it something a team can build against.</p>
   </header>
 
-  <div class="cs-subnav" style="position: sticky; top: 0; z-index: 95; background: #f9f6ef; border-bottom: 1px solid #e2dcc0;">
+  <div class="cs-subnav" style="position: sticky; top: 0; z-index: 95; background: #f9f6ef; border-bottom: 2px solid #e2dcc0; transition: border-color .3s;">
     <div class="cs-nav" style="max-width: 1200px; margin: 0 auto; padding: 16px 64px; display: flex; flex-wrap: wrap; gap: 8px 32px; font-size: 13px; letter-spacing: .16em; text-transform: uppercase;">
-      <a href="#amazon-intuit" data-goatcounter-click="case-study-nav-amazon-intuit" title="Case study: Amazon × Intuit" style="display: flex; gap: 8px; align-items: baseline; color: #14342e;"><span style="color: #c45f3f; font-weight: 600;">01</span>Amazon × Intuit</a>
-      <a href="#ai-for-tax" data-goatcounter-click="case-study-nav-ai-for-tax" title="Case study: AI for tax" style="display: flex; gap: 8px; align-items: baseline; color: #14342e;"><span style="color: #c45f3f; font-weight: 600;">02</span>AI for tax</a>
-      <a href="#platform" data-goatcounter-click="case-study-nav-platform" title="Case study: Platform" style="display: flex; gap: 8px; align-items: baseline; color: #14342e;"><span style="color: #c45f3f; font-weight: 600;">03</span>Platform</a>
-      <a href="#filing" data-goatcounter-click="case-study-nav-filing" title="Case study: Filing" style="display: flex; gap: 8px; align-items: baseline; color: #14342e;"><span style="color: #c45f3f; font-weight: 600;">04</span>Filing</a>
-      <a href="#invoicing" data-goatcounter-click="case-study-nav-invoicing" title="Case study: Invoicing" style="display: flex; gap: 8px; align-items: baseline; color: #14342e;"><span style="color: #c45f3f; font-weight: 600;">05</span>Invoicing</a>
-      <a href="#payroll" data-goatcounter-click="case-study-nav-payroll" title="Case study: Payroll" style="display: flex; gap: 8px; align-items: baseline; color: #14342e;"><span style="color: #c45f3f; font-weight: 600;">06</span>Payroll</a>
+      <a href="#amazon-intuit" data-goatcounter-click="case-study-nav-amazon-intuit" title="Case study: Amazon × Intuit" style="display: flex; gap: 8px; align-items: baseline;"><span class="chip" data-chip="#ffc0c0"></span><span style="color: #c45f3f; font-weight: 600;">01</span>Amazon × Intuit</a>
+      <a href="#ai-for-tax" data-goatcounter-click="case-study-nav-ai-for-tax" title="Case study: AI for tax" style="display: flex; gap: 8px; align-items: baseline;"><span class="chip" data-chip="#008471"></span><span style="color: #c45f3f; font-weight: 600;">02</span>AI for tax</a>
+      <a href="#platform" data-goatcounter-click="case-study-nav-platform" title="Case study: Platform" style="display: flex; gap: 8px; align-items: baseline;"><span class="chip" data-chip="#dce8dd"></span><span style="color: #c45f3f; font-weight: 600;">03</span>Platform</a>
+      <a href="#filing" data-goatcounter-click="case-study-nav-filing" title="Case study: Filing" style="display: flex; gap: 8px; align-items: baseline;"><span class="chip" data-chip="#f2e4c9"></span><span style="color: #c45f3f; font-weight: 600;">04</span>Filing</a>
+      <a href="#invoicing" data-goatcounter-click="case-study-nav-invoicing" title="Case study: Invoicing" style="display: flex; gap: 8px; align-items: baseline;"><span class="chip" data-chip="#eae7c8"></span><span style="color: #c45f3f; font-weight: 600;">05</span>Invoicing</a>
+      <a href="#payroll" data-goatcounter-click="case-study-nav-payroll" title="Case study: Payroll" style="display: flex; gap: 8px; align-items: baseline;"><span class="chip" data-chip="#dcdff0"></span><span style="color: #c45f3f; font-weight: 600;">06</span>Payroll</a>
     </div>
   </div>
 
@@ -425,6 +430,44 @@
   setNavHeight();
   window.addEventListener('resize', setNavHeight);
   window.addEventListener('load', setNavHeight);
+})();
+</script>
+<script>
+(function () {
+  var bar = document.querySelector('.cs-subnav');
+  var row = document.querySelector('.cs-nav');
+  var links = Array.prototype.slice.call(row.querySelectorAll('a[href^="#"]'));
+  var sections = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+  var current = null;
+  function update() {
+    var threshold = bar.getBoundingClientRect().bottom + 2;
+    var active = null;
+    for (var i = 0; i < sections.length; i++) {
+      if (sections[i] && sections[i].getBoundingClientRect().top <= threshold) active = i;
+    }
+    if (active === current) return;
+    current = active;
+    links.forEach(function (a, i) { a.classList.toggle('is-active', i === active); });
+    if (active === null) {
+      bar.style.borderBottomColor = '#e2dcc0';
+    } else {
+      var chip = links[active].querySelector('.chip');
+      bar.style.borderBottomColor = chip.getAttribute('data-chip');
+      if (row.scrollWidth > row.clientWidth) {
+        var a = links[active];
+        row.scrollTo({ left: a.offsetLeft - 24, behavior: 'smooth' });
+      }
+    }
+  }
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { ticking = false; update(); });
+  }, { passive: true });
+  window.addEventListener('resize', update);
+  window.addEventListener('load', update);
+  update();
 })();
 </script>
 <script data-goatcounter="https://michicaprovato.goatcounter.com/count"
