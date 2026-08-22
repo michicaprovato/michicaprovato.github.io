@@ -26,7 +26,7 @@
   .cs-nav .chip { display: inline-block; width: 9px; height: 9px; border-radius: 50%; align-self: center; transform: scale(0); transition: transform .25s; }
   .cs-nav a.is-active .chip { transform: scale(1); }
   @media (prefers-reduced-motion: reduce) { .cs-nav .chip { transition: none; } .cs-subnav { transition: none !important; } }
-  section[id] { scroll-margin-top: calc(var(--nav-h, 97px) + 70px) !important; }
+  section[id] { scroll-margin-top: var(--stack-h, 150px) !important; }
   .grain { position: fixed; inset: 0; pointer-events: none; z-index: 90; opacity: .45; background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%22.9%22 numOctaves=%222%22/%3E%3CfeColorMatrix type=%22saturate%22 values=%220%22/%3E%3C/filter%3E%3Crect width=%22300%22 height=%22300%22 filter=%22url(%23n)%22 opacity=%22.16%22/%3E%3C/svg%3E'); }
   @media (max-width: 860px) {
     nav[style] { flex-wrap: wrap; gap: 14px; padding: 22px 24px !important; }
@@ -425,7 +425,10 @@
 (function () {
   var nav = document.querySelector('nav');
   function setNavHeight() {
-    document.documentElement.style.setProperty('--nav-h', nav.getBoundingClientRect().height + 'px');
+    var navH = nav.getBoundingClientRect().height;
+    document.documentElement.style.setProperty('--nav-h', navH + 'px');
+    var bar = document.querySelector('.cs-subnav');
+    if (bar) document.documentElement.style.setProperty('--stack-h', (navH + bar.getBoundingClientRect().height - 1) + 'px');
   }
   setNavHeight();
   window.addEventListener('resize', setNavHeight);
@@ -440,7 +443,7 @@
   var sections = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
   var current = null;
   function update() {
-    var threshold = bar.getBoundingClientRect().bottom + 2;
+    var threshold = bar.getBoundingClientRect().bottom + 8;
     var active = null;
     for (var i = 0; i < sections.length; i++) {
       if (sections[i] && sections[i].getBoundingClientRect().top <= threshold) active = i;
