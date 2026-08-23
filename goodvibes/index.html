@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Team Good Vibes — FSHD Walk &amp; Roll</title>
+<meta name="description" content="Walk with Team Good Vibes at the FSHD Walk &amp; Roll on Saturday, September 19 at Lake Aquitaine Park, Mississauga. Join the team, grab a shirt, RSVP.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#22352B">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Team Good Vibes — FSHD Walk &amp; Roll">
+<meta property="og:description" content="Saturday, September 19 at Lake Aquitaine Park. Join the team, grab a shirt, RSVP in 20 seconds.">
+<meta property="og:image" content="https://michicaprovato.github.io/goodvibes/assets/team-photo-640.webp">
+<meta property="og:url" content="https://michicaprovato.github.io/goodvibes/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232F4A3C'/%3E%3Cg stroke='%23E9C46A' stroke-width='4' stroke-linecap='round'%3E%3Cline x1='32' y1='9' x2='32' y2='17'/%3E%3Cline x1='15' y1='16' x2='21' y2='22'/%3E%3Cline x1='49' y1='16' x2='43' y2='22'/%3E%3Cline x1='7' y1='32' x2='15' y2='33'/%3E%3Cline x1='57' y1='32' x2='49' y2='33'/%3E%3C/g%3E%3Ccircle cx='32' cy='38' r='15' fill='%23E9A63A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&amp;family=Pacifico&amp;family=Archivo:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #22352B; font-family: Archivo, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #E9A63A; }
+  a:hover { color: #E9C46A; }
+  :focus-visible { outline: 3px solid #E9A63A; outline-offset: 2px; }
+
+  /* Outlined "can't make it" CTA under the form */
+  .cta-ghost {
+    display: block; text-align: center; background: transparent; color: #E9C46A;
+    text-decoration: none; border: 2px solid #E9C46A; border-radius: 999px; padding: 15px;
+    font: 800 15px Archivo, sans-serif; letter-spacing: 1.5px;
+  }
+  .cta-ghost:hover { background: #E9C46A; color: #22352B; }
+
+  /* Centered link through to the story page */
+  .story-link { font: 800 13px Archivo, sans-serif; letter-spacing: 2px; text-align: center; }
+
+  /* Shirt chest print — scales with the shirt image via container units */
+  .shirt-wrap { position: relative; width: 380px; max-width: 100%; container-type: inline-size; }
+  .shirt-print {
+    position: absolute; left: 46.5%; top: 27%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center;
+    font-size: 30px; font-size: 7.895cqw; width: 5em; pointer-events: none;
+  }
+  .shirt-print .script { display: flex; flex-direction: column; align-items: center; transform: rotate(-4deg); }
+  .shirt-print .script div { font-family: Pacifico, cursive; font-size: 1em; color: #F3ECDC; line-height: 1.15; }
+  .shirt-print .script .good { clip-path: polygon(0 0, 6.667em 0, 6.667em 1.0133em, 0 1.0133em); }
+  .shirt-print .script .vibes { margin-top: -0.1667em; }
+  .shirt-print svg { width: 3.533em; height: 0.767em; margin-top: 0.2333em; }
+  .shirt-print .tagline { font-family: Archivo, sans-serif; font-weight: 800; font-size: 0.2333em; letter-spacing: 0.357em; color: #E9C46A; margin-top: 0.714em; }
+
+  /* RSVP form */
+  .field-label { font: 800 13px Archivo, sans-serif; letter-spacing: 2px; color: #C9D6C4; }
+  #rsvp-name {
+    font: 600 17px Archivo, sans-serif; padding: 13px 16px; border: 2px solid #3D5747;
+    border-radius: 12px; background: #22352B; color: #F3ECDC; width: 100%; box-sizing: border-box;
+  }
+  #rsvp-name::placeholder { color: #7B9080; }
+  .pills { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pills.split > .pill { flex: 1; }
+  .pill { display: block; cursor: pointer; }
+  .pill input { position: absolute; width: 1px; height: 1px; opacity: 0; margin: 0; }
+  .pill span {
+    display: block; text-align: center; min-width: 56px; padding: 11px 14px; border-radius: 999px;
+    border: 2px solid #3D5747; background: transparent; color: #DCE5D8;
+    font: 800 15px Archivo, sans-serif; transition: background .15s, color .15s, border-color .15s;
+  }
+  .pills.split .pill span { padding: 13px 14px; }
+  .pill:hover span { border-color: #8FAE95; }
+  .pill input:checked + span { background: #E9A63A; color: #22352B; border-color: #E9A63A; }
+  .pill input:focus-visible + span { outline: 3px solid #E9A63A; outline-offset: 2px; }
+  #rsvp-submit {
+    background: #E9A63A; color: #22352B; border: none; border-radius: 999px; padding: 17px;
+    font: 800 17px Archivo, sans-serif; letter-spacing: 1.5px; cursor: pointer; width: 100%;
+  }
+  #rsvp-submit:hover { background: #D89227; }
+  #rsvp-submit[disabled] { opacity: .65; cursor: default; }
+  #rsvp-error { font: 700 14px Archivo, sans-serif; color: #E9C46A; }
+  #rsvp-error:empty { display: none; }
+  .reset-link {
+    align-self: flex-start; background: none; border: none; font: 700 14px Archivo, sans-serif;
+    color: #E9C46A; cursor: pointer; padding: 0; text-decoration: underline;
+  }
+  [hidden] { display: none !important; }
+  /* focused programmatically for screen readers — no visible ring */
+  #rsvp-success:focus, #rsvp-success:focus-visible { outline: none; }
+
+  @media (max-width: 640px) {
+    h1[style] { font-size: clamp(34px, 9vw, 46px) !important; }
+    .when-where { grid-template-columns: 1fr !important; }
+    .rsvp-card { padding: 28px 22px !important; }
+    .shirt-card { padding: 28px 18px !important; }
+  }
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; padding: 52px 20px 80px;">
+  <div style="max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px;">
+
+    <!-- ── Hero ─────────────────────────────────────────────── -->
+    <header style="display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center;">
+      <div style="width: 180px; height: 180px; border-radius: 50%; background: #2F4A3C; border: 4px dashed #E9C46A; box-shadow: 0 0 0 7px #2F4A3C, 0 0 0 9px #C9BFA8, 0 0 60px rgba(233,166,58,0.35); display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0;">
+        <svg width="58" height="37" viewBox="0 0 130 82" aria-hidden="true">
+          <g stroke="#E9C46A" stroke-width="6" stroke-linecap="round">
+            <line x1="65" y1="4" x2="65" y2="20"/><line x1="30" y1="18" x2="41" y2="30"/><line x1="100" y1="18" x2="89" y2="30"/><line x1="12" y1="50" x2="28" y2="52"/><line x1="118" y1="50" x2="102" y2="52"/>
+          </g>
+          <circle cx="65" cy="62" r="28" fill="#E9A63A"/>
+          <circle cx="55" cy="57" r="3.5" fill="#2F4A3C"/><circle cx="75" cy="57" r="3.5" fill="#2F4A3C"/>
+          <path d="M 53 67 Q 65 77 77 67" fill="none" stroke="#2F4A3C" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+        <div style="font-family: 'Alfa Slab One', serif; font-size: 26px; color: #F3ECDC; line-height: 1;">GOOD</div>
+        <div style="font-family: Pacifico, cursive; font-size: 25px; color: #E9A63A; line-height: 1.1; margin-top: -3px;">Vibes</div>
+        <div style="font: 800 7px Archivo, sans-serif; letter-spacing: 2px; color: #E9C46A; margin-top: 4px;">TO CURE FSHD</div>
+      </div>
+
+      <h1 style="font-family: 'Alfa Slab One', serif; font-size: 46px; color: #F3ECDC; margin: 0; line-height: 1.1;">Walk with us for <span style="font-family: Pacifico, cursive; color: #E9A63A;">Jacob</span></h1>
+      <p style="font-size: 18px; color: #C9D6C4; max-width: 520px; margin: 0; line-height: 1.55; text-wrap: pretty;">Team Good Vibes is back at the FSHD Walk &amp; Roll, and it means the world that you&rsquo;d spend a Saturday morning with us. Join the team, grab a shirt, and let&rsquo;s top last year.</p>
+
+      <div class="when-where" style="width: 100%; max-width: 560px; display: grid; grid-template-columns: 1fr 1.6fr; gap: 14px; margin-top: 4px;">
+        <div style="background: #2C4436; border: 1px solid #3D5747; border-radius: 16px; padding: 20px 22px; display: flex; flex-direction: column; gap: 6px; text-align: left;">
+          <span style="font: 800 11px Archivo, sans-serif; letter-spacing: 3px; color: #E9A63A;">WHEN</span>
+          <span style="font: 800 18px Archivo, sans-serif; color: #F3ECDC; line-height: 1.3;">Saturday,<br>September 19</span>
+          <span style="font: 600 14px Archivo, sans-serif; color: #8FAE95;">Morning start</span>
+        </div>
+        <div style="background: #2C4436; border: 1px solid #3D5747; border-radius: 16px; padding: 20px 22px; display: flex; flex-direction: column; gap: 6px; text-align: left;">
+          <span style="font: 800 11px Archivo, sans-serif; letter-spacing: 3px; color: #E9A63A;">WHERE</span>
+          <span style="font: 800 18px Archivo, sans-serif; color: #F3ECDC; line-height: 1.3;">Lake Aquitaine Park</span>
+          <span style="font: 600 14px Archivo, sans-serif; color: #C9D6C4;">Meadowvale Community Centre</span>
+          <a href="https://maps.google.com/?q=6655+Glen+Erin+Dr,+Mississauga,+ON+L5N+3L4" target="_blank" rel="noopener" style="font: 600 13px Archivo, sans-serif; color: #8FAE95;">6655 Glen Erin Dr, Mississauga, ON L5N 3L4 &#8599;</a>
+        </div>
+      </div>
+
+      <div style="width: 100%; max-width: 480px; display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;">
+          <span id="raised-label" style="font-family: 'Alfa Slab One', serif; font-size: 28px; color: #E9A63A; line-height: 1;">$7,493</span>
+          <span id="goal-note" style="font: 700 13px Archivo, sans-serif; letter-spacing: 1px; color: #8FAE95; text-align: right;">raised so far this year &middot; goal $10,000</span>
+        </div>
+        <div style="height: 16px; background: #1A2E24; border: 1px solid #3D5747; border-radius: 999px; overflow: hidden;">
+          <div id="progress-fill" style="height: 100%; width: 74.93%; background: linear-gradient(90deg, #B4552D, #E9A63A); border-radius: 999px; transition: width 0.6s;"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── Story link ───────────────────────────────────────── -->
+    <div style="display: flex; justify-content: center;">
+      <a class="story-link" href="last-year.html">LAST YEAR WE RAISED $10,000+ &mdash; READ THE STORY &rarr;</a>
+    </div>
+
+    <!-- ── Shirt preview ────────────────────────────────────── -->
+    <section class="shirt-card" style="background: #F3ECDC; border-radius: 20px; padding: 36px 30px; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+      <div style="font: 800 14px Archivo, sans-serif; letter-spacing: 4px; color: #B4552D; text-align: center;">THIS YEAR&rsquo;S TEAM SHIRT</div>
+      <div class="shirt-wrap">
+        <img src="assets/shirt-380.webp" srcset="assets/shirt-380.webp 380w, assets/shirt-760.webp 760w" sizes="(max-width: 640px) calc(100vw - 76px), 380px" width="380" height="336" alt="Hunter green team tee with the Good Vibes stitched-patch print on the chest" style="width: 100%; display: block;">
+        <div class="shirt-print" aria-hidden="true">
+          <div class="script">
+            <div class="good">Good</div>
+            <div class="vibes">Vibes</div>
+          </div>
+          <svg viewBox="0 0 120 26">
+            <g stroke="#E9C46A" stroke-width="2.5" stroke-linecap="round">
+              <line x1="60" y1="1" x2="60" y2="7"/>
+              <line x1="46.5" y1="5.9" x2="50.4" y2="10.5"/>
+              <line x1="73.5" y1="5.9" x2="69.6" y2="10.5"/>
+              <line x1="39.6" y1="16.9" x2="45.4" y2="18.4"/>
+              <line x1="80.4" y1="16.9" x2="74.6" y2="18.4"/>
+            </g>
+            <path d="M 48 22 A 12 12 0 0 1 72 22 Z" fill="#E9A63A"/>
+          </svg>
+          <div class="tagline">TO CURE FSHD</div>
+        </div>
+      </div>
+      <div style="font: 700 13px Archivo, sans-serif; color: #6B8460; letter-spacing: 1px; text-align: center;">Hunter green tee &middot; stitched-patch print on the chest</div>
+    </section>
+
+    <!-- ── RSVP ─────────────────────────────────────────────── -->
+    <section class="rsvp-card" style="background: #2C4436; border: 2px dashed #E9C46A; border-radius: 20px; box-shadow: 0 0 0 6px #2C4436, 0 0 0 7px #3D5747; padding: 36px 34px; margin: 0 7px; display: flex; flex-direction: column; gap: 22px;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <h2 style="font-family: 'Alfa Slab One', serif; font-size: 28px; color: #F3ECDC; margin: 0;">Count me in</h2>
+        <div style="font: 700 13px Archivo, sans-serif; letter-spacing: 3px; color: #E9A63A;">TAKES 20 SECONDS &middot; SHIRT INCLUDED</div>
+      </div>
+
+      <div id="rsvp-success" hidden tabindex="-1" style="display: flex; flex-direction: column; gap: 22px;">
+        <div style="background: #E9A63A; border-radius: 14px; padding: 22px 24px;">
+          <div id="confirm-name" style="font-family: 'Alfa Slab One', serif; font-size: 20px; color: #22352B;"></div>
+          <div id="confirm-detail" style="font-size: 14px; color: #4A3A16; margin-top: 2px; font-weight: 600;"></div>
+          <div style="font-size: 14px; color: #4A3A16; margin-top: 8px; font-weight: 700;">One last step: finish registering on our <a href="https://pro.gofundme.com/team/824788" target="_blank" rel="noopener" style="color: #22352B;">GoFundMe team page</a> (it should have opened in a new tab).</div>
+        </div>
+        <button type="button" id="rsvp-reset" class="reset-link">Add another walker</button>
+      </div>
+
+      <form id="rsvp-form" novalidate style="display: flex; flex-direction: column; gap: 22px;">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <label class="field-label" for="rsvp-name">YOUR NAME</label>
+          <input id="rsvp-name" name="name" type="text" autocomplete="name" placeholder="e.g. Aunt Rosa">
+        </div>
+
+        <fieldset style="border: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+          <legend class="field-label" style="padding: 0; margin-bottom: 8px;">SHIRT SIZE <span style="color: #8FAE95; letter-spacing: 1px;">&middot; UNISEX SIZING</span></legend>
+          <div class="pills">
+            <label class="pill"><input type="radio" name="size" value="S"><span>S</span></label>
+            <label class="pill"><input type="radio" name="size" value="M"><span>M</span></label>
+            <label class="pill"><input type="radio" name="size" value="L"><span>L</span></label>
+            <label class="pill"><input type="radio" name="size" value="XL"><span>XL</span></label>
+            <label class="pill"><input type="radio" name="size" value="2XL"><span>2XL</span></label>
+            <label class="pill"><input type="radio" name="size" value="Youth"><span>Youth</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset style="border: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+          <legend class="field-label" style="padding: 0; margin-bottom: 8px;">STAYING FOR LUNCH AFTER THE WALK?</legend>
+          <div class="pills split">
+            <label class="pill"><input type="radio" name="lunch" value="yes"><span>Yes, save me a seat</span></label>
+            <label class="pill"><input type="radio" name="lunch" value="no"><span>Just the walk</span></label>
+          </div>
+        </fieldset>
+
+        <div id="rsvp-error" role="alert" aria-live="polite"></div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <button type="submit" id="rsvp-submit">I&rsquo;M COMING &mdash; REGISTER NOW</button>
+          <a class="cta-ghost" href="https://pro.gofundme.com/team/824788" target="_blank" rel="noopener">I CAN&rsquo;T MAKE IT &mdash; DONATE NOW</a>
+        </div>
+      </form>
+    </section>
+
+    <!-- ── Footer ───────────────────────────────────────────── -->
+    <footer style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
+      <div style="width: 140px; border-top: 2px dashed #E9C46A; opacity: 0.6;"></div>
+      <div style="text-align: center; font-size: 14px; color: #8FAE95; font-weight: 700; letter-spacing: 1px;">With love, Michica, Dino, Jacob &amp; Isabella</div>
+    </footer>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ───────────────────────────────────────────────────────────
+     Fundraising numbers. These are only a fallback for when the
+     fetch below fails — the live values come from raised.json,
+     which .github/workflows/goodvibes-raised.yml refreshes from
+     the GoFundMe team page every evening. To change the goal,
+     change it on GoFundMe; it flows through from there.
+     ─────────────────────────────────────────────────────────── */
+  var RAISED_THIS_YEAR = 7493;
+  var FUNDRAISING_GOAL = 10000;
+
+  /* ───────────────────────────────────────────────────────────
+     Where RSVPs go: the "Team Good Vibes — RSVP" Google Form,
+     which feeds the "Team Good Vibes RSVP (Responses)" Sheet.
+
+     The three entry ids below are that form's field ids, and the
+     values this page sends must match its options exactly —
+     S/M/L/XL/2XL/Youth and Yes/No. If you edit the questions in
+     Google Forms, re-check them: open the form's live URL, View
+     Page Source, and search for "entry.".
+
+     Google Forms sends no CORS headers, so the POST is
+     fire-and-forget — the page can't tell a rejected submission
+     from an accepted one. Every RSVP is also mirrored to the
+     visitor's own localStorage as a backstop.
+     ─────────────────────────────────────────────────────────── */
+  var GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSdmeN7PS_1TRvzmpSSVPzcKgkXhKwpMN7aFMi4WVDmKPWA3ug/formResponse';
+  var FIELD_NAME         = 'entry.1432397143';  // Your name
+  var FIELD_SIZE         = 'entry.839059730';   // Shirt size (unisex)
+  var FIELD_LUNCH        = 'entry.734331759';   // Staying for lunch after the walk?
+
+  var GOFUNDME_URL = 'https://pro.gofundme.com/team/824788';
+
+  var $ = function (id) { return document.getElementById(id); };
+  var fmt = function (n) { return '$' + Number(n).toLocaleString('en-CA'); };
+
+  /* Thermometer — drawn from the fallback, then again from raised.json */
+  function drawThermometer(raised, goal) {
+    $('raised-label').textContent = fmt(raised);
+    $('goal-note').textContent = raised >= goal
+      ? 'raised so far this year · past our ' + fmt(goal) + ' goal'
+      : 'raised so far this year · goal ' + fmt(goal);
+    $('progress-fill').style.width =
+      Math.max(2, Math.min(100, raised / goal * 100)) + '%';
+  }
+
+  drawThermometer(RAISED_THIS_YEAR, FUNDRAISING_GOAL);
+
+  fetch('raised.json', { cache: 'no-store' })
+    .then(function (res) { return res.ok ? res.json() : null; })
+    .then(function (d) {
+      if (d && isFinite(d.raised) && isFinite(d.goal) && d.goal > 0) {
+        drawThermometer(Math.round(d.raised), Math.round(d.goal));
+      }
+    })
+    .catch(function () { /* offline or mid-deploy — keep the baked-in numbers */ });
+
+  /* RSVP form */
+  var form = $('rsvp-form'), success = $('rsvp-success'), errorEl = $('rsvp-error'),
+      submitBtn = $('rsvp-submit'), nameInput = $('rsvp-name');
+  var SUBMIT_LABEL = submitBtn.innerHTML;
+
+  function checked(name) {
+    var el = form.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.value : null;
+  }
+
+  function saveLocally(entry) {
+    try {
+      var all = JSON.parse(localStorage.getItem('gv-rsvps') || '[]');
+      all.push(entry);
+      localStorage.setItem('gv-rsvps', JSON.stringify(all));
+    } catch (e) { /* private browsing, quota — not worth blocking on */ }
+  }
+
+  function send(entry) {
+    if (!GOOGLE_FORM_ACTION) return Promise.resolve();
+    var body = new FormData();
+    body.append(FIELD_NAME, entry.name);
+    body.append(FIELD_SIZE, entry.size);
+    body.append(FIELD_LUNCH, entry.lunch ? 'Yes' : 'No');
+    // Opaque response by design — resolves unless the network itself fails.
+    return fetch(GOOGLE_FORM_ACTION, { method: 'POST', mode: 'no-cors', body: body });
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var name = nameInput.value.trim();
+    var size = checked('size');
+    var lunch = checked('lunch');
+
+    if (!name) return fail('Please add your name so we know who to cheer for.', nameInput);
+    if (!size) return fail('Pick a shirt size — the tees are the whole point!',
+                           form.querySelector('input[name="size"]'));
+    if (!lunch) return fail('Let us know about lunch so we can save seats.',
+                            form.querySelector('input[name="lunch"]'));
+
+    errorEl.textContent = '';
+
+    // Opened synchronously, while the click that triggered this submit is
+    // still the current user gesture — deferring it until after the POST
+    // resolves gets it swallowed by popup blockers. The confirmation panel
+    // links to the same page for anyone whose browser blocks it anyway.
+    window.open(GOFUNDME_URL, '_blank', 'noopener');
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'SENDING…';
+
+    var entry = { name: name, size: size, lunch: lunch === 'yes', at: new Date().toISOString() };
+    saveLocally(entry);
+
+    send(entry).then(function () {
+      $('confirm-name').textContent = name + ', you’re on the roster!';
+      $('confirm-detail').textContent = 'Shirt size ' + size +
+        (lunch === 'yes' ? ' · seat saved at lunch.' : ' · walk only, we’ll miss you at lunch!');
+      form.hidden = true;
+      success.hidden = false;
+      success.focus();
+    }).catch(function (err) {
+      console.error(err);
+      fail('That didn’t go through — give it another try, or just text us and we’ll add you.');
+    }).then(function () {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = SUBMIT_LABEL;
+    });
+  });
+
+  function fail(message, focusEl) {
+    errorEl.textContent = message;
+    if (focusEl) focusEl.focus();
+  }
+
+  $('rsvp-reset').addEventListener('click', function () {
+    form.reset();
+    errorEl.textContent = '';
+    success.hidden = true;
+    form.hidden = false;
+    nameInput.focus();
+  });
+})();
+</script>
+</body>
+</html>

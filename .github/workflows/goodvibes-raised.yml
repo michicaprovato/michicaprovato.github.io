@@ -1,0 +1,43 @@
+name: Refresh Good Vibes fundraising total
+
+on:
+  schedule:
+    # 01:00 UTC = 9pm Toronto (EDT) / 8pm (EST) — "every evening".
+    # GitHub queues cron jobs on a best-effort basis, so the actual run
+    # can drift by a few minutes to an hour at busy times.
+    - cron: '0 1 * * *'
+  workflow_dispatch:        # lets you run it on demand from the Actions tab
+
+# Scheduled workflows are disabled automatically after 60 days with no
+# commits to the repo. If the number ever goes stale, check the Actions
+# tab for a "this workflow was disabled" banner and re-enable it.
+
+permissions:
+  contents: write
+
+concurrency:
+  group: goodvibes-raised
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Scrape the GoFundMe team page
+        run: python3 scripts/fetch-raised.py
+
+      - name: Commit if the total changed
+        run: |
+          # The script writes raised.json and syncs the fallback numbers
+          # baked into index.html, so both files have to go in the commit.
+          if git diff --quiet -- goodvibes/raised.json goodvibes/index.html; then
+            echo "No change in the fundraising total — nothing to commit."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add goodvibes/raised.json goodvibes/index.html
+          git commit -m "Refresh Good Vibes fundraising total"
+          git push
