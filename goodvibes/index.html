@@ -216,7 +216,7 @@
 
         <div style="display: flex; flex-direction: column; gap: 10px;">
           <button type="submit" id="rsvp-submit">I&rsquo;M COMING &mdash; REGISTER NOW</button>
-          <a class="cta-ghost" href="https://pro.gofundme.com/team/824788" target="_blank" rel="noopener">I CAN&rsquo;T MAKE IT &mdash; DONATE NOW</a>
+          <a class="cta-ghost" id="rsvp-donate" href="https://pro.gofundme.com/team/824788" target="_blank" rel="noopener">I CAN&rsquo;T MAKE IT &mdash; DONATE NOW</a>
         </div>
       </form>
     </section>
@@ -248,11 +248,13 @@
      Where RSVPs go: the "Team Good Vibes — RSVP" Google Form,
      which feeds the "Team Good Vibes RSVP (Responses)" Sheet.
 
-     The three entry ids below are that form's field ids, and the
-     values this page sends must match its options exactly —
-     S/M/L/XL/2XL/Youth and Yes/No. If you edit the questions in
-     Google Forms, re-check them: open the form's live URL, View
-     Page Source, and search for "entry.".
+     The entry ids below are that form's field ids, and the values
+     this page sends must match its options exactly. Only "Your name"
+     and "Coming to the walk?" are required in the Form — shirt size
+     and lunch are optional, because someone who can't make it won't
+     have answered them and Google would reject the whole response.
+     If you edit the questions in Google Forms, re-check the ids:
+     open the form's live URL, View Page Source, search for "entry.".
 
      Google Forms sends no CORS headers, so the POST is
      fire-and-forget — the page can't tell a rejected submission
@@ -260,9 +262,14 @@
      visitor's own localStorage as a backstop.
      ─────────────────────────────────────────────────────────── */
   var GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSdmeN7PS_1TRvzmpSSVPzcKgkXhKwpMN7aFMi4WVDmKPWA3ug/formResponse';
-  var FIELD_NAME         = 'entry.1432397143';  // Your name
-  var FIELD_SIZE         = 'entry.839059730';   // Shirt size (unisex)
-  var FIELD_LUNCH        = 'entry.734331759';   // Staying for lunch after the walk?
+  var FIELD_NAME         = 'entry.1432397143';  // Your name          (required)
+  var FIELD_COMING       = 'entry.88905451';    // Coming to the walk? (required)
+  var FIELD_SIZE         = 'entry.839059730';   // Shirt size (unisex) (optional)
+  var FIELD_LUNCH        = 'entry.734331759';   // Lunch after?        (optional)
+
+  // Must match the Form's options byte-for-byte or Google drops the response.
+  var COMING_YES = 'Yes';
+  var COMING_NO  = 'No \u2014 but I\'m donating';
 
   var GOFUNDME_URL = 'https://pro.gofundme.com/team/824788';
 
@@ -312,8 +319,9 @@
     if (!GOOGLE_FORM_ACTION) return Promise.resolve();
     var body = new FormData();
     body.append(FIELD_NAME, entry.name);
-    body.append(FIELD_SIZE, entry.size);
-    body.append(FIELD_LUNCH, entry.lunch ? 'Yes' : 'No');
+    body.append(FIELD_COMING, entry.coming ? COMING_YES : COMING_NO);
+    if (entry.size) body.append(FIELD_SIZE, entry.size);
+    if (entry.lunch !== null) body.append(FIELD_LUNCH, entry.lunch ? 'Yes' : 'No');
     // Opaque response by design — resolves unless the network itself fails.
     return fetch(GOOGLE_FORM_ACTION, { method: 'POST', mode: 'no-cors', body: body });
   }
@@ -342,7 +350,8 @@
     submitBtn.disabled = true;
     submitBtn.textContent = 'SENDING…';
 
-    var entry = { name: name, size: size, lunch: lunch === 'yes', at: new Date().toISOString() };
+    var entry = { name: name, coming: true, size: size,
+                  lunch: lunch === 'yes', at: new Date().toISOString() };
     saveLocally(entry);
 
     send(entry).then(function () {
@@ -365,6 +374,36 @@
     errorEl.textContent = message;
     if (focusEl) focusEl.focus();
   }
+
+  /* "I can't make it — donate now".
+
+     This stays an ordinary <a href> and we never preventDefault, so the
+     browser opens GoFundMe natively whether or not any of this runs —
+     no popup blocker to fight, and a JS error can't come between someone
+     and the donate page. Recording the decline is strictly best-effort.
+
+     A blank name is left unrecorded rather than blocking to ask for it:
+     the Form requires a name, and nothing is worth putting in front of
+     a donation. */
+  var donateSent = false;
+  $('rsvp-donate').addEventListener('click', function () {
+    if (donateSent) return;
+    var name = nameInput.value.trim();
+    if (!name) return;
+
+    donateSent = true;
+    var lunchVal = checked('lunch');
+    var entry = {
+      name: name, coming: false, size: checked('size'),
+      lunch: lunchVal === null ? null : lunchVal === 'yes',
+      at: new Date().toISOString()
+    };
+    saveLocally(entry);
+    send(entry).catch(function (err) {
+      console.error(err);
+      donateSent = false;   // let a second click retry
+    });
+  });
 
   $('rsvp-reset').addEventListener('click', function () {
     form.reset();
