@@ -21,6 +21,10 @@
   nav a.active { color: #c45f3f; position: relative; }
   nav a.active::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); bottom: -12px; width: 6px; height: 6px; border-radius: 50%; background: #c45f3f; }
   .cs-subnav { position: sticky; top: calc(var(--nav-h, 97px) - 1px); z-index: 95; background: #f9f6ef; border-bottom: 1px solid #e2dcc0; }
+  .cs-index { flex-wrap: nowrap !important; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; scroll-snap-type: x proximity; scroll-padding-left: 64px; }
+  .cs-index::-webkit-scrollbar { display: none; }
+  .cs-index > div { flex-wrap: nowrap !important; flex: none; }
+  .cs-index a { flex: none; scroll-snap-align: start; white-space: nowrap; }
   .cs-index a { color: rgba(20,52,46,.6); font-weight: 400; }
   .cs-index a.is-active { color: #14342e; font-weight: 600; }
   section[id] { scroll-margin-top: var(--stack-h, 150px) !important; }
@@ -31,7 +35,7 @@
     section[style] > div[style] { padding-left: 0; padding-right: 0; }
     [style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
     [style*="gap: 72px"] { gap: 36px !important; }
-    .cs-index { padding: 16px 24px !important; }
+    .cs-index { padding: 16px 24px !important; gap: 8px 28px !important; scroll-padding-left: 24px; }
   }
 </style>
 </head>
