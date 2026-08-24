@@ -21,6 +21,9 @@
   nav a.active { color: #c45f3f; position: relative; }
   nav a.active::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); bottom: -12px; width: 6px; height: 6px; border-radius: 50%; background: #c45f3f; }
   .cs-subnav { top: calc(var(--nav-h, 97px) - 1px) !important; }
+  .cs-nav { gap: 8px 30px !important; flex-wrap: nowrap !important; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; scroll-snap-type: x proximity; scroll-padding-left: 64px; }
+  .cs-nav::-webkit-scrollbar { display: none; }
+  .cs-nav a { flex: none; scroll-snap-align: start; white-space: nowrap; }
   .cs-nav a { color: rgba(20,52,46,.6); font-weight: 400; }
   .cs-nav a.is-active { color: #14342e; font-weight: 600; }
   .cs-nav .chip { display: inline-block; width: 9px; height: 9px; border-radius: 50%; align-self: center; transform: scale(0); transition: transform .25s; }
@@ -37,9 +40,7 @@
     [style*="padding-left: 72px"], [style*="padding-left: 48px"] { padding-left: 0 !important; border-left: none !important; }
     [style*="font-size: 64px"] { font-size: 42px !important; }
     [style*="margin: 0 -64px"] { margin: 0 -24px !important; padding-left: 24px !important; padding-right: 24px !important; }
-    .cs-nav { flex-wrap: nowrap !important; overflow-x: auto; gap: 28px !important; padding: 16px 24px !important; -webkit-overflow-scrolling: touch; scrollbar-width: none; scroll-snap-type: x proximity; scroll-padding-left: 24px; }
-    .cs-nav::-webkit-scrollbar { display: none; }
-    .cs-nav a { flex: none; scroll-snap-align: start; white-space: nowrap; }
+    .cs-nav { gap: 28px !important; padding: 16px 24px !important; scroll-padding-left: 24px; }
   }
 </style>
 </head>
