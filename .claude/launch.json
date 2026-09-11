@@ -6,6 +6,12 @@
       "runtimeExecutable": "npx",
       "runtimeArgs": ["--yes", "serve", "-l", "8123", "/Users/michicaprovato/Documents/Michica-portfolio"],
       "port": 8123
+    },
+    {
+      "name": "mobile-portfolio",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "serve", "-l", "8124", "/Users/michicaprovato/Documents/mobile-portfolio"],
+      "port": 8124
     }
   ]
 }
