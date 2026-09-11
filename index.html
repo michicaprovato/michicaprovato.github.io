@@ -29,14 +29,24 @@
     [style*="padding-left: 72px"], [style*="padding-left: 48px"] { padding-left: 0 !important; border-left: none !important; }
     [style*="font-size: 64px"] { font-size: 42px !important; }
     [style*="margin: 0 -64px"] { margin: 0 -24px !important; padding-left: 24px !important; padding-right: 24px !important; }
-    h1 span { margin-left: 0 !important; }
     [style*="padding: 44px 44px 0 0"], [style*="padding: 40px 40px 0 0"] { padding: 24px 24px 0 !important; justify-content: center !important; }
     [style*="padding: 48px 48px 48px 0"] { padding: 0 48px 48px !important; }
+    header h1[style] { font-size: clamp(20px, 7vw, 40px) !important; }
+    nav div[style*="gap: 44px"] { gap: 18px !important; font-size: 13px !important; }
+  }
+  @keyframes settleL { from { transform: translateX(min(520px, 40vw)); } to { transform: translateX(0); } }
+  @keyframes settleR { from { transform: translateX(min(-520px, -40vw)); } to { transform: translateX(0); } }
+  @keyframes ghostOut { 0% { opacity: .45; } 60% { opacity: .35; } 100% { opacity: 0; } }
+  @keyframes shadowTight { from { text-shadow: 0 0 0 rgba(214,211,95,0); } to { text-shadow: 4px 3px 0 rgba(214,211,95,.8); } }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; }
+    h1 span { text-shadow: 4px 3px 0 rgba(214,211,95,.8) !important; }
   }
 </style>
 </head>
 <body>
-<div style="min-height: 100vh; background: #f9f6ef; color: #14342e; font-family: 'Raleway', sans-serif;">
+<div style="min-height: 100vh; overflow-x: hidden; background: #f9f6ef; color: #14342e; font-family: 'Raleway', sans-serif;">
   <div class="grain"></div>
   <nav style="display: flex; justify-content: space-between; align-items: baseline; padding: 36px 64px; border-bottom: 1px solid #e2dcc0;">
     <a href="index.html" style="font-family: 'Josefin Sans', sans-serif; font-weight: 400; font-size: 20px; letter-spacing: .3em; text-transform: uppercase; color: #14342e;">Michica Provato</a>
@@ -49,9 +59,13 @@
   </nav>
 
   <header style="padding: 140px 64px 120px; max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 42px;">
-    <div style="font-size: 16px; letter-spacing: .24em; text-transform: uppercase; color: #c45f3f;">design leader · toronto</div>
-    <h1 style="margin: 0; font-family: 'Josefin Sans', sans-serif; font-weight: 300; font-size: clamp(40px, 5.2vw, 72px); line-height: 1.08; letter-spacing: .08em; text-transform: uppercase;"><span style="text-shadow: 4px 3px 0 rgba(214,211,95,.8);">Design with intent.</span><br><span style="margin-left: 1.25em; color: #008471; text-shadow: 4px 3px 0 rgba(214,211,95,.8);">Lead with heart.</span><br><span style="margin-left: 2.5em; text-shadow: 4px 3px 0 rgba(214,211,95,.8);">Scale with clarity.</span></h1>
-    <div style="display: flex; justify-content: flex-end;">
+    <div style="font-size: 16px; letter-spacing: .24em; text-transform: uppercase; color: #c45f3f; animation: fade .6s .1s both;">design leader · toronto</div>
+    <h1 style="margin: 0; display: flex; flex-direction: column; align-items: flex-start; gap: .12em; font-family: 'Josefin Sans', sans-serif; font-weight: 300; font-size: clamp(40px, 5.2vw, 72px); line-height: 1; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap;">
+      <div style="position: relative; width: max-content; animation: settleL 2.2s cubic-bezier(.1,.8,.15,1) .2s both;"><span style="position: absolute; right: 100%; padding-right: .6em; animation: ghostOut 2.2s .2s both;">Design with intent. Design with intent.</span><span style="display: inline-block; animation: shadowTight .2s steps(1) 2.4s both;">Design with intent.</span></div>
+      <div style="position: relative; width: max-content; color: #008471; animation: settleR 2.6s cubic-bezier(.1,.8,.15,1) .2s both;"><span style="display: inline-block; animation: shadowTight .2s steps(1) 2.8s both;">Lead with heart.</span><span style="position: absolute; left: 100%; padding-left: .6em; animation: ghostOut 2.6s .2s both;">Lead with heart. Lead with heart.</span></div>
+      <div style="position: relative; width: max-content; animation: settleL 3s cubic-bezier(.1,.8,.15,1) .2s both;"><span style="position: absolute; right: 100%; padding-right: .6em; animation: ghostOut 3s .2s both;">Scale with clarity. Scale with clarity.</span><span style="display: inline-block; animation: shadowTight .2s steps(1) 3.2s both;">Scale with clarity.</span></div>
+    </h1>
+    <div style="display: flex; justify-content: flex-start; animation: fade .6s 3.4s both;">
       <div style="max-width: 520px; display: flex; flex-direction: column; gap: 18px;">
         <div style="width: 84px; height: 4px; background: #c45f3f; box-shadow: 5px 4px 0 #d6d35f;"></div>
         <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 26px; line-height: 1.5; color: #33453e; text-wrap: pretty;">I build teams that do the best work of their careers, and products that earn the trust of the people who depend on them.</p>
